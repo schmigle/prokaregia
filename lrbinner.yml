@@ -1,0 +1,23 @@
+name: lrbinner
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - scipy
+  - seaborn
+  - h5py
+  - hdbscan
+  - gcc
+  - openmp
+  - tqdm
+  - biopython
+  - fraggenescan
+  - hmmer
+  - tabulate
+  - pytorch
+  - pytorch-cuda=11.7
+prefix: /home/u30/moshesteyn/miniforge3/envs/lrbinner
