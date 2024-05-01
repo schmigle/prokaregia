@@ -1,0 +1,25 @@
+#import from miniconda to create conda environment inside singularity
+Bootstrap: docker
+From: continuumio/miniconda3:latest
+
+#copy files from computer to container
+%files
+    /groups/baltrus/moshesteyn/docker_folder/prokaregia_v2.sh /prokaregia.sh
+    # /groups/baltrus/moshesteyn/docker_folder/prokaryote_fastq.py /prokaryote_fastq.py
+    /groups/baltrus/moshesteyn/docker_folder/prokaregia_packed.tar.gz prokaregia_packed.tar.gz
+
+#update everything, then take the packed conda environment and unpack it here. Give full permissions on necessary files.
+%post
+    apt-get update
+    tar -xvzf /prokaregia_packed.tar.gz -C /opt/conda
+    conda-unpack
+    rm /prokaregia_packed.tar.gz
+    chmod +x prokaregia.sh
+    apt-get install -y build-essential libboost-all-dev git cmake curl libncurses5-dev zlib1g-dev
+    
+%environment
+  PATH=/:$PATH
+
+#run main code
+# %runscript
+#     ./prokaregia_v2.sh    
