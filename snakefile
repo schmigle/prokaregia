@@ -33,7 +33,7 @@ rule filtlong:
     input:
         "input"
     conda:
-        "envs/filtlong.yaml"
+        "envs/filtlong.yml"
     shell:
         "filtlong --min_length 1000 --keep_percent 90 {input} > QC.fastq"   
 
@@ -49,7 +49,7 @@ rule flye:
     threads:
         "threads"
     conda:
-        "envs/flye.yaml"
+        "envs/flye.yml"
     shell:
         "flye --{params.technology}-raw prokarya_QC.fastq --meta -o flye -t {threads}"
 
@@ -63,7 +63,7 @@ rule ntLink:
     threads:
         "threads"
     conda:
-        envs/ntLink.yaml
+        "envs/ntLink.yml"
     shell:
         ntLink scaffold gap_fill target=prokarya_assembly.fasta reads=prokarya_QC.fastq
         mv *ntLink.scaffolds.fa ntlink_out.fasta && rm *ntLink*
@@ -78,7 +78,7 @@ rule minimap:
     threads:
         "threads"
     conda:
-        "envs/minimap.yaml"
+        "envs/minimap.yml"
     shell:
         "minimap2 -ax map-{params.technology} -t {threads} --sam-hit-only {input.reads} prokarya_QC.fastq > aln.sam"
 
@@ -92,7 +92,7 @@ rule racon:
     threads:
         "threads"
     conda:
-        "envs/racon.yaml"
+        "envs/racon.yml"
     shell:
         "racon -t {threads} prokarya_QC.fastq aln.sam {input.contigs} > {output.contigs}"
 
