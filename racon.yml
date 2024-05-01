@@ -1,0 +1,9 @@
+name: racon
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - racon
+prefix: /home/u30/moshesteyn/miniforge3/envs/racon
