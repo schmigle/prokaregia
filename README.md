@@ -3,3 +3,11 @@
 
  # Usage
  Prokaregia is provided as a singularity container. It can be downloaded and then run with the following commands:
+ ```bash
+singularity pull library://schmiggle/prokaregia/prokaregia
+singularity run prokaregia.sif [OPTIONS]
+```
+Or run all at once as follows:
+```bash
+singularity run library://schmiggle/prokaregia/prokaregia [OPTIONS]
+```
