@@ -20,7 +20,7 @@ polished_bins: DASTool bins further polished with NTLink and two rounds of Racon
 
 checkm2_graphs: quality graphs displaying completeness and contamination as assessed by Checkm2 for the above directories. On small datasets, frequently some or all binning algorithms do not produce any output with high enough quality to appear in these graphs.
 
-NOTE: Checkm2 often poorly assesses highly reduced symbionts; in my testing, it reports complete Wolbachia, Liberibacter, and Carsonella genomes as less than 40% complete. If you believe these are present in your sample, I recommend checking individual bins with BLAST or a 16S search to see if it is present, then perhaps comparing the bin to a known reference genome to estimate completeness. Automatic implementation of this functionality will be available as an option soon.
+NOTE: Checkm2 often poorly assesses highly reduced symbionts; in my testing, it reports complete Wolbachia, Liberibacter, and Carsonella genomes as less than 40% complete. If you believe these are present in your sample, I recommend checking individual bins with BLAST or a 16S search to see if it is present, then perhaps comparing the bin to a known reference genome to estimate completeness. Automatic implementation of this functionality will be available in the future.
 
 ## Options
 ```bash
