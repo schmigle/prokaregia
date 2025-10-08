@@ -1,25 +1,32 @@
-#import from miniconda to create conda environment inside singularity
 Bootstrap: docker
-From: continuumio/miniconda3:latest
+From: ubuntu:18.04
 
-#copy files from computer to container
 %files
-    /groups/baltrus/moshesteyn/docker_folder/prokaregia_v2.sh /prokaregia.sh
-    # /groups/baltrus/moshesteyn/docker_folder/prokaryote_fastq.py /prokaryote_fastq.py
-    /groups/baltrus/moshesteyn/docker_folder/prokaregia_packed.tar.gz prokaregia_packed.tar.gz
+    yml/*yml /
+    tiara_post_filter_prokaregia.sh /prokaregia.sh
+    prokaregia_graph_simplified.py /prokaregia_graph.py
 
-#update everything, then take the packed conda environment and unpack it here. Give full permissions on necessary files.
+
 %post
     apt-get update
-    tar -xvzf /prokaregia_packed.tar.gz -C /opt/conda
-    conda-unpack
-    rm /prokaregia_packed.tar.gz
-    chmod +x prokaregia.sh
-    apt-get install -y build-essential libboost-all-dev git cmake curl libncurses5-dev zlib1g-dev
+    apt-get install -y gcc wget git
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh -O miniconda.sh
+    bash miniconda.sh -b -p /opt/miniconda
+    export PATH="/opt/miniconda/bin:$PATH"
+    echo ". /opt/miniconda/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
+    for i in *yml; do
+      conda env create -f $i
+    done
+    conda clean --all
+
+    chmod +x /prokaregia.sh prokaregia_graph_simplified.py
+    . /opt/miniconda/etc/profile.d/conda.sh
+    conda activate checkm2
+    checkm2 database download
     
 %environment
-  PATH=/:$PATH
-
-#run main code
-# %runscript
-#     ./prokaregia_v2.sh    
+    export LC_ALL=C
+    export LC_NUMERIC=en_GB.UTF-8
+    export PATH="/opt/miniconda/bin:$PATH"
+    PATH=/:$PATH
+    source /opt/miniconda/etc/profile.d/conda.sh
