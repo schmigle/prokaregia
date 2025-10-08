@@ -4,7 +4,7 @@ From: continuumio/miniconda3:latest
 
 #copy files from computer to container
 %files
-    /groups/baltrus/moshesteyn/docker_folder/prokaregia_v2.sh /prokaregia.sh
+    prokaregia_v2.sh /prokaregia.sh
     # /groups/baltrus/moshesteyn/docker_folder/prokaryote_fastq.py /prokaryote_fastq.py
     /groups/baltrus/moshesteyn/docker_folder/prokaregia_packed.tar.gz prokaregia_packed.tar.gz
 
