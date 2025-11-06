@@ -11,7 +11,7 @@ Or run all at once as follows:
 ```bash
 singularity run -v [WORKING DIRECTORY FULL PATH] -w [WORKING DIRECTORY] library://schmiggle/prokaregia/prokaregia [OPTIONS]
 ```
-You can download a relatively small test file here: https://drive.google.com/file/d/1oMpxD7OzQhvX9lSattX3mH7QkrSJQYG8/view?usp=sharing
+You can download a relatively small test file here: https://zenodo.org/records/17540419
 ### Output Files and Directories
 maxbin, metabat, metacoag, rosella, semibin: single binning algorithm outputs, refined with Rosella.
 
