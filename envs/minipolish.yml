@@ -1,0 +1,7 @@
+name: minipolish
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - minipolish
+  - miniasm

@@ -6,4 +6,3 @@ channels:
   - defaults
 dependencies:
   - flye
-prefix: /home/u30/moshesteyn/miniforge3/envs/flye

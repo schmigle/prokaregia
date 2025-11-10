@@ -1,9 +1,0 @@
-name: minimap
-channels:
-  - ursky
-  - bioconda
-  - conda-forge
-  - defaults
-dependencies:
-  - minimap2
-prefix: /home/u30/moshesteyn/miniforge3/envs/minimap

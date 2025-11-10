@@ -1,0 +1,18 @@
+name: metacoag
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - metacoag
+  - python=3.11.0
+  - python-igraph=0.10.4
+  - biopython=1.80
+  - networkx=3.0
+  - scipy=1.10.0
+  - numpy=1.24.2
+  - tqdm=4.64.1
+  - click=8.1.3
+  - fraggenescan=1.31
+  - hmmer=3.3.2

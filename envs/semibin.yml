@@ -1,0 +1,8 @@
+name: semibin
+channels:
+  - conda-forge
+  - numba
+  - bioconda
+  - defaults
+dependencies:
+  - semibin

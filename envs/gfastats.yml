@@ -1,0 +1,8 @@
+name: gfastats
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - gfastats=1.3.6

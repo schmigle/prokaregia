@@ -1,0 +1,6 @@
+# ProkaRegia Pipeline Configuration
+
+# Input/Output
+input_fastq: "input_reads.fastq"  # Path to your input FASTQ file
+output_dir: "ProkaRegia"          # Output directory (created in current directory, or use absolute path)
+seq_tech: "ont"                    # Sequencing technology: "ont" or "pacbio"

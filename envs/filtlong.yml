@@ -6,4 +6,3 @@ channels:
   - defaults
 dependencies:
   - filtlong
-prefix: /home/u30/moshesteyn/miniforge3/envs/filtlong

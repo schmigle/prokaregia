@@ -1,0 +1,9 @@
+name: das_tool
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+  - pytorch
+dependencies:
+  - das_tool

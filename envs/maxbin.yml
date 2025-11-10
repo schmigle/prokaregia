@@ -1,0 +1,9 @@
+name: maxbin
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - maxbin2
+  - python=3.12.12
