@@ -1,0 +1,33 @@
+# Snakemake output
+.snakemake/
+ProkaRegia*/
+*.log
+
+# Conda environments (created by snakemake)
+.conda/
+
+# Python
+__pycache__/
+*.pyc
+
+# Data files (don't commit large files)
+*.fastq
+*.fastq.gz
+*.fasta
+*.fasta.gz
+*.fna
+*.bam
+*.bam.bai
+*.sam
+*.gfa
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
