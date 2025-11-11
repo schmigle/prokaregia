@@ -21,7 +21,6 @@ INPUT_FASTQ=""
 SEQ_TECH=""
 OUTPUT_DIR="ProkaRegia"
 THREADS=$(nproc)
-USE_MAMBA=false
 STEP=""
 
 # Optional step-specific inputs
@@ -47,7 +46,6 @@ Required arguments:
 Optional arguments:
   -o, --output DIR       Output directory (default: ProkaRegia in current directory)
   -t, --threads NUM      Number of threads (default: all available cores)
-  -m, --mamba            Use mamba instead of conda for faster dependency resolution
   --step STEP            Run specific pipeline step (default: full pipeline)
   -h, --help             Show this help message
 
@@ -75,11 +73,11 @@ rerun specific steps as needed.
 Examples:
   # Full pipeline
   prokaregia -i reads.fastq -s ont -t 16
-  prokaregia -i reads.fastq -s pacbio -o MyResults -t 32 -m
+  prokaregia -i reads.fastq -s pacbio -o MyResults
 
   # Run specific steps with user-provided inputs
   prokaregia -i reads.fastq -s ont --step binning --contigs my_contigs.fasta --bam my_alignment.bam --gfa my_graph.gfa
-  prokaregia -i reads.fastq -s ont --step contamination --assembly my_assembly.fasta
+  prokaregia -i reads.fastq -s pacbio --step contamination --assembly my_assembly.fasta
   prokaregia -i reads.fastq -s ont --step polish --bins-dir my_bins/
 
 EOF
@@ -123,10 +121,6 @@ while [[ $# -gt 0 ]]; do
             fi
             THREADS="$2"
             shift 2
-            ;;
-        -m|--mamba)
-            USE_MAMBA=true
-            shift
             ;;
         --step)
             if [[ -z "$2" ]] || [[ "$2" == -* ]]; then
@@ -404,10 +398,6 @@ fi
 SNAKEMAKE_CMD="snakemake --snakefile $SNAKEFILE --use-conda --cores $THREADS"
 SNAKEMAKE_CMD="$SNAKEMAKE_CMD --config input_fastq=$INPUT_FASTQ seq_tech=$SEQ_TECH output_dir=$OUTPUT_DIR"
 
-if [[ "$USE_MAMBA" == true ]]; then
-    SNAKEMAKE_CMD="$SNAKEMAKE_CMD --conda-frontend mamba"
-fi
-
 # Add target rules if specified, otherwise run 'all'
 if [[ -n "$TARGET_RULES" ]]; then
     SNAKEMAKE_CMD="$SNAKEMAKE_CMD $TARGET_RULES"
@@ -421,7 +411,6 @@ echo "Input FASTQ:     $INPUT_FASTQ"
 echo "Sequencing tech: $SEQ_TECH"
 echo "Output dir:      $OUTPUT_DIR"
 echo "Threads:         $THREADS"
-echo "Use mamba:       $USE_MAMBA"
 if [[ -n "$STEP" ]]; then
     echo "Pipeline step:   $STEP"
     if [[ -n "$ASSEMBLY" ]]; then
