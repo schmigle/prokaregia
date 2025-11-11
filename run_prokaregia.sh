@@ -30,6 +30,8 @@ CONTIGS=""
 BAM=""
 COVERAGE=""
 BINS_DIR=""
+GFA=""
+ASSEMBLY_INFO=""
 
 # Parse command line arguments
 show_help() {
@@ -53,6 +55,8 @@ Step-specific input arguments (used with --step):
   --assembly FILE        Assembly FASTA file (for contamination step)
   --contigs FILE         Contigs FASTA file (for binning, refinement, dastool steps)
   --bam FILE             Sorted BAM alignment file (for binning step)
+  --gfa FILE             Assembly graph GFA file (for binning step)
+  --assembly-info FILE   Assembly info file from Flye (for binning step)
   --coverage FILE        Coverage TSV file (for refinement, dastool steps)
   --bins-dir DIR         Directory containing bins (for refinement, polish steps)
 
@@ -74,7 +78,7 @@ Examples:
   prokaregia -i reads.fastq -s pacbio -o MyResults -t 32 -m
 
   # Run specific steps with user-provided inputs
-  prokaregia -i reads.fastq -s ont --step binning --contigs my_contigs.fasta --bam my_alignment.bam
+  prokaregia -i reads.fastq -s ont --step binning --contigs my_contigs.fasta --bam my_alignment.bam --gfa my_graph.gfa
   prokaregia -i reads.fastq -s ont --step contamination --assembly my_assembly.fasta
   prokaregia -i reads.fastq -s ont --step polish --bins-dir my_bins/
 
@@ -178,6 +182,24 @@ while [[ $# -gt 0 ]]; do
             BINS_DIR="$2"
             shift 2
             ;;
+        --gfa)
+            if [[ -z "$2" ]] || [[ "$2" == -* ]]; then
+                echo "Error: --gfa requires a value"
+                show_help
+                exit 1
+            fi
+            GFA="$2"
+            shift 2
+            ;;
+        --assembly-info)
+            if [[ -z "$2" ]] || [[ "$2" == -* ]]; then
+                echo "Error: --assembly-info requires a value"
+                show_help
+                exit 1
+            fi
+            ASSEMBLY_INFO="$2"
+            shift 2
+            ;;
         -h|--help)
             show_help
             exit 0
@@ -252,6 +274,24 @@ if [[ -n "$STEP" ]]; then
                     echo "Warning: BAM index file ${BAM}.bai not found. Will be generated."
                 fi
                 echo "Using provided BAM: $BAM"
+            fi
+            if [[ -n "$GFA" ]]; then
+                if [[ ! -f "$GFA" ]]; then
+                    echo "Error: GFA file not found: $GFA"
+                    exit 1
+                fi
+                mkdir -p "$OUTPUT_DIR"
+                cp "$GFA" "$OUTPUT_DIR/prokarya_graph.gfa"
+                echo "Using provided GFA: $GFA"
+            fi
+            if [[ -n "$ASSEMBLY_INFO" ]]; then
+                if [[ ! -f "$ASSEMBLY_INFO" ]]; then
+                    echo "Error: Assembly info file not found: $ASSEMBLY_INFO"
+                    exit 1
+                fi
+                mkdir -p "$OUTPUT_DIR"
+                cp "$ASSEMBLY_INFO" "$OUTPUT_DIR/prokarya_info.txt"
+                echo "Using provided assembly info: $ASSEMBLY_INFO"
             fi
             ;;
         refinement)
@@ -392,6 +432,12 @@ if [[ -n "$STEP" ]]; then
     fi
     if [[ -n "$BAM" ]]; then
         echo "  - BAM:         $BAM"
+    fi
+    if [[ -n "$GFA" ]]; then
+        echo "  - GFA:         $GFA"
+    fi
+    if [[ -n "$ASSEMBLY_INFO" ]]; then
+        echo "  - Assembly info: $ASSEMBLY_INFO"
     fi
     if [[ -n "$COVERAGE" ]]; then
         echo "  - Coverage:    $COVERAGE"
