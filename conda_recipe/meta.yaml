@@ -18,7 +18,7 @@ build:
 requirements:
   run:
     - python >=3.12
-    - snakemake-minimal =8.11.0  
+    - snakemake-minimal >=8.20.0  
 
 test:
   commands:
