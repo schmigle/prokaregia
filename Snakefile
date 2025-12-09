@@ -54,7 +54,7 @@ if SEQ_TECH not in ["ont", "pacbio"]:
 
 # Define output files
 rule all:
-    input:admittedly
+    input:
         expand("{outdir}/polished_checkm/quality_report.tsv", outdir=OUTPUT_DIR),
         expand("{outdir}/checkm2_graphs/Completeness.png", outdir=OUTPUT_DIR),
         expand("{outdir}/checkm2_graphs/Contamination.png", outdir=OUTPUT_DIR)
