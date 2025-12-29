@@ -1,0 +1,42 @@
+{% set name = "prokaregia" %}
+{% set version = "1.0.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+# Use local source for testing (before GitHub release)
+source:
+  path: ../
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - python =3.12
+    - snakemake-minimal =8.11.0
+
+test:
+  commands:
+    - prokaregia -h
+
+about:
+  home: https://github.com/yourusername/prokaregia_snakemake
+  license: MIT
+  license_file: LICENSE
+  summary: 'Automated long-read assembly and binning pipeline for prokaryotic genomes'
+  description: |
+    ProkaRegia is a Snakemake-based pipeline for processing long-read
+    sequencing data (ONT/PacBio) to assemble and bin prokaryotic genomes.
+  doc_url: https://github.com/yourusername/prokaregia_snakemake
+  dev_url: https://github.com/yourusername/prokaregia_snakemake
+
+extra:
+  recipe-maintainers:
+    - schmigle
+  channels:
+    - conda-forge
+    - bioconda
+    - nodefaults

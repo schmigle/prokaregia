@@ -1,0 +1,12 @@
+name: coverm
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+  - pytorch
+dependencies:
+  - coverm
+  - python=3.12
+  - pytorch-cpu=2.1.0
+  - cpuonly

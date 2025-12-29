@@ -1,0 +1,8 @@
+name: filtlong
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - filtlong

@@ -1,0 +1,7 @@
+name: minimap_racon
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - minimap2
+  - racon=1.4.12

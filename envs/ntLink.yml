@@ -1,0 +1,8 @@
+name: ntLink
+channels:
+  - ursky
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - ntLink
