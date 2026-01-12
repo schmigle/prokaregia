@@ -26,6 +26,9 @@ prokaregia -i reads.fastq -s pacbio -t 16
 # Custom output directory
 prokaregia -i reads.fastq -s ont -t 16 -o MyResults
 ```
+A toy dataset can be downloaded here: https://zenodo.org/records/17540419
+
+Running this dataset requires ~30GB of storage and will result in two PNG files of output graphs, each showing one output bin.
 
 ## Citations
 In addition to citing ProkaRegia, please cite the following tools:
