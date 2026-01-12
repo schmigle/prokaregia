@@ -1,4 +1,4 @@
-# ProkaRegia Snakemake Pipeline
+# ProkaRegia
 
 An automated long-read assembly and binning pipeline for prokaryotic genomes in contaminated datasets.
 
